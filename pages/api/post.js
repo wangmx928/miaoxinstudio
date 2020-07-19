@@ -1,4 +1,4 @@
-import Navigation from './Navigation'
+import Navigation from '../Navigation'
 import React, { Component, Fragment } from 'react'
 import axios from 'axios'
 
@@ -8,7 +8,7 @@ export default class extends Component {
   static async getInitialProps() {
 
     // Make request for posts.
-    const response = await axios.get( 'http://box5232.temp.domains/~miaoxins/wp-json/wp/v2/posts' )
+    const response = await axios.get( 'http://box5232.temp.domains/~miaoxins/wp-json/wp/v2/pages' )
 
     // Return response to posts object in props.
     return {

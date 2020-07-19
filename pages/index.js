@@ -1,31 +1,78 @@
 import Head from 'next/head'
 import Navigation from './Navigation'
-import { Fragment } from 'react'
+import { Fragment, useState} from 'react'
 
+import { Icon } from "@rmwc/icon";
+import { Grid, GridCell} from "@rmwc/grid";
+import { Typography } from "@rmwc/typography";
+import { Button } from "@rmwc/button";
+import { List, ListItem} from "@rmwc/list";
+import { Drawer, DrawerHeader, DrawerTitle, DrawerSubtitle, DrawerContent } from "@rmwc/drawer";
 
-export default function Home() {
+import './css';
+
+function Example() {
+  const [navigationModalVisibility, setNavigationModalVisibility] = useState(false);
+
   return (
-    <div className="container">
+    <>
+      {/** Make the drawer appear right-to-left */}
+      <Drawer
+        dir="rtl"
+        modal
+        open={navigationModalVisibility}
+        onClose={() => setNavigationModalVisibility(false)}
+      >
+        {/** Set the content back to left-to-right */}
+        <DrawerHeader dir="ltr">
+          <DrawerTitle>Menu</DrawerTitle>
+          <DrawerSubtitle>More items to explore</DrawerSubtitle>
+        </DrawerHeader>
+
+        <DrawerContent dir="ltr">
+          <List>
+            <ListItem>Projects</ListItem>
+            <ListItem>Blogs</ListItem>
+            <ListItem>About</ListItem>
+          </List>
+        </DrawerContent>
+      </Drawer>
+
+      <Button raised label="Explore More" onClick={() => setNavigationModalVisibility(true)}/>
+    </>
+  );
+}
+
+function Home() {
+  return (
+    <div className="container mdc-theme--background">
       <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
+        <title>Miaoxin Wang</title>
+        {/* <link rel="icon" href="/favicon.ico" /> */}
       </Head>
 
       <main>
         <Fragment>
-          <Navigation/>
+          {/* <Navigation/> */}
+          <Example/>
         </Fragment>
+
+        <Grid>
+          <GridCell span={12}>
+            <Typography use="headline1">
+              Miaoxin Wang
+            </Typography>
+          </GridCell>
+          
+          <GridCell span={12}>
+            <Typography use="overline">
+              Reliable, innovative, and hands-on UX endeavor. Loves to facilitate people's daily routine and design for mundane to sublime. Current research interests cover affective computing, CSCW, and humane technology for a better life.
+            </Typography>
+          </GridCell>
+        </Grid>
       </main>
 
       <footer>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className="logo" />
-        </a>
       </footer>
 
       <style jsx>{`
@@ -46,22 +93,6 @@ export default function Home() {
           justify-content: center;
           align-items: center;
         }
-
-        footer {
-          width: 100%;
-          height: 100px;
-          border-top: 1px solid #eaeaea;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-
-        @media (max-width: 600px) {
-          .grid {
-            width: 100%;
-            flex-direction: column;
-          }
-        }
       `}</style>
 
       <style jsx global>{`
@@ -80,4 +111,6 @@ export default function Home() {
       `}</style>
     </div>
   )
-}
+};
+
+export default Home
